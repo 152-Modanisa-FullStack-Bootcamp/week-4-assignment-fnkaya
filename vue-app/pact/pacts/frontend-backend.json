@@ -1,0 +1,86 @@
+{
+  "consumer": {
+    "name": "frontend"
+  },
+  "provider": {
+    "name": "backend"
+  },
+  "interactions": [
+    {
+      "description": "a request not empty for videos",
+      "providerState": "fetch videos successfully",
+      "request": {
+        "method": "GET",
+        "path": "/videos"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+        },
+        "body": {
+          "data": [
+            {
+              "id": 1,
+              "videoAddress": "videoAddress",
+              "coverImage": "coverImage",
+              "hoverImage": "hoverImage",
+              "title": "Vue.js Crash Course",
+              "viewCount": 255,
+              "publishDateInMonth": 10,
+              "ownerImage": "ownerImage",
+              "ownerName": "ownerName",
+              "description": "description",
+              "favorite": true
+            }
+          ]
+        },
+        "matchingRules": {
+          "$.body.data": {
+            "min": 1
+          },
+          "$.body.data[*].*": {
+            "match": "type"
+          },
+          "$.body.data[*].id": {
+            "match": "type"
+          },
+          "$.body.data[*].videoAddress": {
+            "match": "type"
+          },
+          "$.body.data[*].coverImage": {
+            "match": "type"
+          },
+          "$.body.data[*].hoverImage": {
+            "match": "type"
+          },
+          "$.body.data[*].title": {
+            "match": "type"
+          },
+          "$.body.data[*].viewCount": {
+            "match": "type"
+          },
+          "$.body.data[*].publishDateInMonth": {
+            "match": "type"
+          },
+          "$.body.data[*].ownerImage": {
+            "match": "type"
+          },
+          "$.body.data[*].ownerName": {
+            "match": "type"
+          },
+          "$.body.data[*].description": {
+            "match": "type"
+          },
+          "$.body.data[*].favorite": {
+            "match": "type"
+          }
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}

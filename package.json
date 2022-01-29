@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "@pact-foundation/pact": "^9.17.2",
+    "jest-pact": "^0.9.1"
+  }
+}
