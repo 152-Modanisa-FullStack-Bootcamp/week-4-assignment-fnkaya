@@ -1,5 +1,6 @@
-import {shallowMount} from "@vue/test-utils";
+import {createLocalVue, shallowMount} from "@vue/test-utils";
 import VideoCard from "@/components/VideoCard";
+import VueRouter from "vue-router";
 
 describe("VideoCard", () => {
     it('should VideoCard component exists', function () {
@@ -22,7 +23,12 @@ describe("VideoCard", () => {
     });
 
     const mountComponent = () => {
+        const localVue = createLocalVue()
+        localVue.use(VueRouter)
+
         return shallowMount(VideoCard, {
+            localVue,
+            router: new VueRouter(),
             propsData: {
                 video: {
                     title: "Video title"

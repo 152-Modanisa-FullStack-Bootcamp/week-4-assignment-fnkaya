@@ -23,7 +23,13 @@ export class API {
     }
 
     async getVideos() {
-        return axios.get(this.withPath('/videos')).then(r => r.data)
+        return axios.get(this.withPath('/videos')).then(r => {
+            const { data } = r
+            return data.map(v => {
+                const slug = v.title.toLowerCase().replaceAll(" ", "-")
+                return { ...v, slug }
+            })
+        })
     }
 }
 

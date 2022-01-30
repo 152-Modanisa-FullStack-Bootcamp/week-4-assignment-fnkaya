@@ -5,7 +5,8 @@
     "/features"
   ],
   "scripts": {
-    "start": "npx cucumber-js --format progress"
+    "start": "npx cucumber-js --format progress",
+    "work": "npx cucumber-js --format progress --tags @work"
   },
   "dependencies": {
     "axe-puppeteer": "^1.1.1",

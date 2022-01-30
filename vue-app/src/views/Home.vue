@@ -3,6 +3,7 @@
     <h1 id="page-title">Home Page</h1>
     <VideoCard v-for="video of videos"
                :key="video.title"
+               :data-slug="video.slug"
                :video="video"
     />
   </div>

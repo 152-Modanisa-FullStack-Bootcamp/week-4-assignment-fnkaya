@@ -1,8 +1,8 @@
 const {Given, When, Then} = require("cucumber");
 const openUrl = require("../support/action/openUrl");
 const checkUrl = require("../support/check/checkUrl");
+const checkUrlContains = require("../support/check/checkUrlContains")
 const checkElementExists = require("../support/check/checkElementExists");
-const checkAttribute = require("../support/check/checkAttribute")
 const assert = require("assert");
 
 Given(/^that User goes to Video Site Project's HomePage$/, async function () {
@@ -28,4 +28,33 @@ Then(/^User can see some of videos' title like$/, async function (table) {
         titles
     )
     assert.equal(titles.length, elementCount, `Expected "${titles.length}" to ${not ? 'equal' : 'not equal'} "${elementCount}" of element "${selector}"`)
+});
+
+Given(/^that User is on Video Site Project's HomePage$/, async function () {
+    this.pageUrl = "http://localhost:8080/"
+    await openUrl.call(this, this.pageUrl)
+    const not = false;
+    await checkUrl.call(this, not, this.pageUrl)
+});
+
+When(/^User clicks "([^"]*)" video$/, async function (title) {
+    const selector = ".video-card"
+
+    this.slug = await this.page.$$eval(
+        selector,
+        async (elements, title) => {
+            const videoCard = elements.find(element => element.querySelector(".video-title").textContent === title)
+            const button = videoCard.querySelector(".watch-button")
+            const { slug } = videoCard.dataset
+            await button.click()
+            return slug
+        },
+        title
+    )
+});
+
+Then(/^User should see watch url correctly$/, async function () {
+    await this.page.waitForNavigation()
+    const not = false
+    await checkUrlContains.call(this, not, this.slug)
 });

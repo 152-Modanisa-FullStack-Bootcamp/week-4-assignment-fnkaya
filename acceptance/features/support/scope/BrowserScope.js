@@ -16,7 +16,8 @@ class BrowserScope {
     async init(){
         const defaultOptions = {
             args: ['--no-sandbox', '--disable-dev-shm-usage'], 
-            ignoreHTTPSErrors: true
+            ignoreHTTPSErrors: true,
+            headless: false
         }
         this.close();
 

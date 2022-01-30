@@ -1,7 +1,7 @@
 <template>
   <div class="video-card">
     <h1 :id="video.title" class="video-title">{{video.title}}</h1>
-    <button type="button" class="watch-button">Watch</button>
+    <button type="button" class="watch-button" @click="navigate()">Watch</button>
   </div>
 </template>
 
@@ -10,6 +10,11 @@ export default {
   name: 'VideoCard',
   props: {
     video: Object
+  },
+  methods: {
+    navigate() {
+      this.$router.push({name: 'Video', params: {slug: this.video.slug}})
+    }
   }
 }
 </script>
