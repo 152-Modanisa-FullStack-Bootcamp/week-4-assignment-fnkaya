@@ -5,6 +5,7 @@ axios.defaults.adapter = adapter;
 
 export class API {
     constructor(url) {
+        url = "https://my-json-server.typicode.com/modanisa/bootcamp-video-db"
         if (url === undefined || url === "") {
             url = process.env.VUE_APP_BASE_API_URL;
         }
