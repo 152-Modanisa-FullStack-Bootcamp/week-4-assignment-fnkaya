@@ -1,6 +1,7 @@
 const {Given, When, Then} = require("cucumber");
 const openUrl = require("../support/action/openUrl");
 const checkUrl = require("../support/check/checkUrl");
+const checkAttribute = require("../support/check/checkAttribute");
 const checkUrlContains = require("../support/check/checkUrlContains")
 const checkElementExists = require("../support/check/checkElementExists");
 const assert = require("assert");
@@ -57,4 +58,29 @@ Then(/^User should see watch url correctly$/, async function () {
     await this.page.waitForNavigation()
     const not = false
     await checkUrlContains.call(this, not, this.slug)
+});
+
+When(/^User hovers "([^"]*)" video$/, async function (title) {
+    this.videoTitle = title
+    const elements = await this.page.$$(".video-card");
+    const element = elements.find(async element => await element.$eval(".video-title", e => e.textContent) === title)
+    const imageElement = await element.$("img")
+    await imageElement.hover()
+    this.hoverImage = await imageElement.evaluate(e => e.src)
+});
+
+Then(/^User should see hovered image$/, async function () {
+    const selector = ".video-card"
+    const title = this.videoTitle
+
+    const src = await this.page.$$eval(
+        selector,
+        async (elements, title) => {
+            const videoCard = elements.find(element => element.querySelector(".video-title").textContent === title)
+            const imageElement = videoCard.querySelector("img")
+            return imageElement.src
+        },
+        title
+    )
+    assert.equal(this.hoverImage, src)
 });

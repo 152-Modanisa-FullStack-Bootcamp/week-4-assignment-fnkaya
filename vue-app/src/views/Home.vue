@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="video-list">
     <h1 id="page-title">Home Page</h1>
     <VideoCard v-for="video of videos"
                :key="video.title"
@@ -26,3 +26,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.video-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+</style>

@@ -17,7 +17,12 @@ class BrowserScope {
         const defaultOptions = {
             args: ['--no-sandbox', '--disable-dev-shm-usage'], 
             ignoreHTTPSErrors: true,
-            headless: false
+            headless: true,
+            sloMo: 250,
+            defaultViewport: {
+                width: 1000,
+                height: 1000
+            }
         }
         this.close();
 
