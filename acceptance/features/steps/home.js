@@ -70,7 +70,14 @@ When(/^User hovers "([^"]*)" video$/, async function (title) {
         find and filter doesn't work on elementHandle object like this
         test works for first item in elements array (ElementHandle[])
      */
-    const element = elements.find(async element => await element.$eval(".video-title", e => e.textContent) === title)
+    let element
+    for (let el of elements) {
+        const titleText = await el.$eval(".video-title", e => e.textContent)
+        if (titleText === title) {
+            element = el;
+            break
+        }
+    }
     const imageElement = await element.$("img")
     this.coverImage = await imageElement.evaluate(e => e.src)
     await imageElement.hover()
